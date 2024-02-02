@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Moirai+One&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow: hidden;
+  user-select: none;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+.container {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  z-index: 1;
+  text-align: center;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  line-height: 6em;
+  color: rgba(255, 255, 255, 0.754);
+}
+
+h1 {
+  font-size: 9vw;
+  font-family: 'Moirai One', sans-serif;
+  margin-bottom: 4vh;
+}
+
+p {
+  font-size: 3vw;
+  line-height: 0;
+  margin-top: 60px;
+}
+
+a,
+small {
+  color: rgba(255, 255, 255, 0.492);
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.buttons {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  line-height: 0;
+  margin-top: 40px;
+}
+
+button {
+  padding: 16px 26px;
+  border: none;
+  font-size: 0.7em;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.818);
+  backdrop-filter: blur(5px);
+  color: rgb(2, 58, 61);
+  cursor: pointer;
+  pointer-events: all;
+  transition: all 0.6s ease-in-out;
+}
+
+button:hover {
+  background-color: rgba(0, 255, 255, 0.381);
+  box-shadow: 0 0 20px cyan;
+  transform: scale(1.05);
+  color: rgb(88, 247, 255);
+}

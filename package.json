@@ -1,0 +1,20 @@
+{
+  "name": "fake-glow-material",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "deploy": "vercel --prod"
+  },
+  "devDependencies": {
+    "vite": "^4.3.9"
+  },
+  "dependencies": {
+    "lil-gui": "^0.18.1",
+    "maath": "^0.7.0",
+    "three": "^0.159.0",
+    "vercel": "^31.0.4"
+  }
+}
