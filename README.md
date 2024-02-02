@@ -6,7 +6,7 @@ A simple to use Fake Glow material for threejs
    <img src="static/preview.jpg" width="100%"/>
 </p>
 
-Live link: <a href="https://threejs-vanilla-holographic-material.vercel.app/" target="_blank">https://threejs-vanilla-holographic-material.vercel.app/</a>
+Live link: <a href="https://fake-glow-material-threejs.vercel.app/" target="_blank">https://fake-glow-material-threejs.vercel.app/</a>
 
 # Introduction
 
@@ -30,12 +30,11 @@ import FakeGlowMaterial from './FakeGlowMaterial.js'
 
 ```
 // ...
-const geometry = new THREE.BoxGeometry();
+const geometry = new THREE.SphereGeometry();
 const FakeGlowMaterial = new FakeGlowMaterial();
-const cube = new THREE.Mesh(geometry, FakeGlowMaterial);
-scene.add(cube);
+const Sphere = new THREE.Mesh(geometry, FakeGlowMaterial);
+scene.add(Sphere);
 // ...
-...
 
 ```
 
