@@ -18,7 +18,7 @@ Unlike traditional approaches using post-processing, my new React Three Fiber ma
 
 ### 1: Download the Material
 
-Create a new file with the contents of [this gist](https://gist.github.com/ektogamat/4bc0035ed0702c6de3bab558658f9c84) on your project and save it as 'HolographicMaterialVanilla.js'
+Create a new file with the contents of [this gist](https://gist.github.com/ektogamat/4bc0035ed0702c6de3bab558658f9c84) on your project and save it as 'FakeGlowMaterial.js'
 
 ### 2: Import the material
 
