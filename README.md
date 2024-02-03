@@ -1,6 +1,6 @@
 # Fake Glow Material for Vanilla Three.js
 
-A simple to use Fake Glow material for threejs
+A simple-to-use Fake Glow material for threejs
 
 <p align="center">
    <img src="static/preview.jpg" width="100%"/>
@@ -81,12 +81,12 @@ const fakeGlowMaterial = new FakeGlowMaterial({
 
 ### License
 
-This component is an open-source creation released under the (MIT) license. While you're free to integrate and innovate with it, I would genuinely appreciate knowing when this HolographicMaterial component sparks creativity in your projects!
+This component is an open-source creation released under the (MIT) license. While you're free to integrate and innovate with it, I would genuinely appreciate knowing when this FakeGlowMaterial sparks creativity in your projects!
 
 ### Resources
 
-Resources: [Threejs](https://threejs.org/), [WebGL](https://github.com/KhronosGroup/WebGL), [Poimanders post processing](https://github.com/pmndrs/postprocessing)
+Resources: [Threejs](https://threejs.org/), [WebGL](https://github.com/KhronosGroup/WebGL)
 
-# Can you leave a star please?
+# Can you leave a star, please?
 
 Would be really appreciated if you are willing to give me a star here on GitHub 🎉 or buy me a coffee ☕ https://www.buymeacoffee.com/andersonmancini. The money will be used to produce more content about threejs or to buy new courses.
