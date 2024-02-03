@@ -124,8 +124,8 @@ gui
   .name('Falloff');
 gui
   .add(fakeGlowMaterial.uniforms.glowInternalRadius, 'value')
-  .min(0)
-  .max(20)
+  .min(-10)
+  .max(10)
   .step(0.01)
   .name('Glow Internal Radius');
 gui
