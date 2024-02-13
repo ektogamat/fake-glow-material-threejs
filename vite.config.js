@@ -13,6 +13,13 @@ export default {
     {
         outDir: '../dist',
         emptyOutDir: true,
-        sourcemap: true
-    }
+        sourcemap: true,
+        target: 'esnext'
+    },
+    optimizeDeps: {
+        esbuildOptions: {
+          target: 'esnext'
+        }
+      },
+     
 }
