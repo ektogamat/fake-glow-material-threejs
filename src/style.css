@@ -12,10 +12,13 @@ body {
 }
 
 .webgl {
-  position: fixed;
-  top: 0;
-  left: 0;
-  outline: none;
+  width: 100vw;
+  height: 50vh;
+}
+
+.webgpu {
+  width: 100vw;
+  height: 50vh;
 }
 
 .container {
