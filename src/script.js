@@ -3,7 +3,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
 import WebGPURenderer from 'three/addons/renderers/webgpu/WebGPURenderer.js';
 import { FakeGlowMaterial as FakeGlowMaterialWebGPU } from './FakeGlowMaterialWebGPU.js'
-import { FakeGlowMaterial as FakeGlowWebGPU } from './FakeGlowGPU.js'
 import FakeGlowMaterial from './FakeGlowMaterial.js';
 
 const params = {
@@ -16,17 +15,11 @@ const params = {
   depthTest: false,
 }
 
-const cotor = {
-  0: FakeGlowMaterial,
-  1: FakeGlowMaterialWebGPU,
-  2: FakeGlowWebGPU,
-}
-
 function initScene(isWebGPU) {
   /**
    * Scene
    */
-  const canvas = document.querySelector(isWebGPU === 1 ? 'canvas.webgpu' : isWebGPU === 2 ? 'canvas.newWebgpu' : 'canvas.webgl')
+  const canvas = document.querySelector(isWebGPU ? 'canvas.webgpu' : 'canvas.webgl')
   const scene = new THREE.Scene()
 
   /**
@@ -34,12 +27,12 @@ function initScene(isWebGPU) {
    */
   const screenRes = {
     width: window.innerWidth,
-    height: window.innerHeight / 3
+    height: window.innerHeight / 2
   }
 
   window.addEventListener('resize', () => {
     screenRes.width = window.innerWidth
-    screenRes.height = window.innerHeight / 3
+    screenRes.height = window.innerHeight / 2
 
     camera.aspect = screenRes.width / screenRes.height
     camera.updateProjectionMatrix()
@@ -77,7 +70,7 @@ function initScene(isWebGPU) {
    */
   const light = new THREE.DirectionalLight()
   light.intensity = 1
-  light.position.set(-20, 20, 50)
+  light.position.set((isWebGPU ? -1 : 1) * -20, (isWebGPU ? -1 : 1) * 20, (isWebGPU ? -1 : 1) * 50)
   scene.add(light)
 
   const ambientLight = new THREE.AmbientLight()
@@ -87,7 +80,7 @@ function initScene(isWebGPU) {
   /**
    * Renderer
    */
-  const renderer = new ([1, 2].includes(isWebGPU) ? WebGPURenderer : THREE.WebGLRenderer)({
+  const renderer = new (isWebGPU ? WebGPURenderer : THREE.WebGLRenderer)({
     canvas: canvas,
     powerPreference: 'high-performance',
     antialias: true,
@@ -110,7 +103,7 @@ function initScene(isWebGPU) {
   })
 
   const skyBox = new THREE.Mesh(geometry, material)
-  // scene.add(skyBox)
+  scene.add(skyBox)
   skyBox.rotation.y = -1
 
   /**
@@ -142,9 +135,8 @@ function initScene(isWebGPU) {
   return [fakeGlowMaterial, renderer];
 }
 
-const [fakeGlowMaterialWebGPU, webgpu] = initScene(1);
-const [fakeGlowMaterial, webgl] = initScene(0);
-const [newFakeGlowMaterial, newWebGPU] = initScene(2);
+const [fakeGlowMaterialWebGPU, webgpu] = initScene(true);
+const [fakeGlowMaterial, webgl] = initScene(false);
 
 /**
  * Set up the GUI for manipulating parameters
@@ -159,7 +151,6 @@ gui
   .onChange((falloff) => {
     fakeGlowMaterial.uniforms.falloff.value = falloff;
     fakeGlowMaterialWebGPU.uFalloff.value = falloff;
-    newFakeGlowMaterial.uFalloff.value = falloff;
   })
   .name('Falloff');
 gui
@@ -170,7 +161,6 @@ gui
   .onChange((glowInternalRadius) => {
     fakeGlowMaterial.uniforms.glowInternalRadius.value = glowInternalRadius;
     fakeGlowMaterialWebGPU.uGlowInternalRadius.value = glowInternalRadius;
-    newFakeGlowMaterial.uGlowInternalRadius.value = glowInternalRadius;
   })
   .name('Glow Internal Radius');
 gui
@@ -183,7 +173,6 @@ gui
   .onChange((color) => {
     fakeGlowMaterial.uniforms.glowColor.value.setStyle(color);
     fakeGlowMaterialWebGPU.uGlowColor.value = new THREE.Color(color);
-    newFakeGlowMaterial.uGlowColor.value = new THREE.Color(color);
   })
   .name('Glow Color');
 gui
@@ -194,7 +183,6 @@ gui
   .onChange((glowSharpness) => {
     fakeGlowMaterial.uniforms.glowSharpness.value = glowSharpness;
     fakeGlowMaterialWebGPU.uGlowSharpness.value = glowSharpness;
-    newFakeGlowMaterial.uGlowSharpness.value = glowSharpness;
   })
   .name('Glow Sharpness');
 gui
@@ -205,7 +193,6 @@ gui
   .onChange((opacity) => {
     fakeGlowMaterial.uniforms.opacity.value = opacity;
     fakeGlowMaterialWebGPU.uOpacity.value = opacity;
-    newFakeGlowMaterial.uOpacity.value = opacity;
   })
   .name('Opacity');
 
@@ -219,42 +206,5 @@ gui
     // fakeGlowMaterialWebGPU.uToneMappingExposure.value = toneMappingExposure;
     webgpu.toneMappingExposure = toneMappingExposure;
     webgl.toneMappingExposure = toneMappingExposure;
-    newWebGPU.toneMappingExposure = toneMappingExposure;
   })
   .name('ToneMappingExposure');
-// gui
-//   .add(fakeGlowMaterial, 'side')
-//   .options({
-//     front: 0,
-//     back: 1,
-//     double: 2,
-//   })
-//   .name('ToneMappingExposure');
-// gui
-//   .add(params, 'depthTest')
-//   .enable()
-//   .onChange((depthTest) => {
-//     fakeGlowMaterialWebGPU.depthTest = depthTest;
-//   })
-//   .name('DepthTest');
-// gui
-//   .add(fakeGlowMaterial, 'blending')
-//   .options({
-//     noBlending: 0,
-//     normal: 1,
-//     add: 2,
-//     subtract: 3,
-//     multiply: 4,
-//   })
-//   .name('BlendMode');
-// gui
-//   .add(renderer, 'toneMapping')
-//   .options({
-//     NoToneMapping: 0,
-//     LinearToneMapping: 1,
-//     ReinhardToneMapping: 2,
-//     CineonToneMapping: 3,
-//     ACESFilmicToneMapping: 4,
-//   })
-//   .name('ToneMapping')
-//   .onChange(tick);
